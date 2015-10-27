@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/relative.main.background">
+
+    <vn.asiantech.internship.footballmanager.widget.HeaderBar
+        android:id="@+id/mHeaderBarTeam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </vn.asiantech.internship.footballmanager.widget.HeaderBar>
+
+    <vn.asiantech.internship.footballmanager.widget.CircleImageView
+        android:id="@+id/mImgLogoLeagueDetail"
+        android:layout_width="@dimen/circleimageview.logo_detail_width_height"
+        android:layout_height="@dimen/circleimageview.logo_detail_width_height"
+        android:layout_below="@id/mHeaderBarTeam"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/circleimageview.logo_detail_margin_top"
+        android:scaleType="centerCrop"
+        android:background="@null"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_avatar" />
+    <TextView
+        android:id="@+id/tvLeagueInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mImgLogoLeagueDetail"
+        android:layout_marginLeft="@dimen/textview.display_margin_left_top"
+        android:layout_marginStart="@dimen/textview.display_margin_left_top"
+        style="@style/textview_display"
+        android:text="@string/textview.text.league_information" />
+
+    <ImageButton
+        android:id="@+id/mImgBtnEditLeague"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mImgLogoLeagueDetail"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/imagebutton.edit_margin_right"
+        android:layout_marginEnd="@dimen/imagebutton.edit_margin_right"
+        android:background="@null"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/custom_button_edit" />
+
+    <EditText
+        android:id="@+id/mEdtLeagueDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mImgBtnEditLeague"
+        android:layout_margin="@dimen/edittext.infor_margin"
+        android:padding="@dimen/edittext.infor_padding"
+        android:enabled="false"
+        android:background="@drawable/custom_textview_background"
+        android:lines="3"
+        android:inputType="textMultiLine"
+        style="@style/textview_detail"
+        android:text="@string/textview.infor" />
+
+    <TextView
+        android:id="@+id/tvMainCouch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mEdtLeagueDetail"
+        android:layout_marginLeft="@dimen/textview.display_margin_left_top"
+        android:layout_marginStart="@dimen/textview.display_margin_left_top"
+        style="@style/textview_display"
+        android:text="@string/textview.text_main_coach"/>
+
+    <ImageButton
+        android:id="@+id/mImgBtnSaveLeagueInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mEdtLeagueDetail"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="@dimen/imagebutton.save_margin_right"
+        android:layout_marginEnd="@dimen/imagebutton.save_margin_right"
+        android:background="@null"
+        android:visibility="invisible"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/custom_button_save" />
+
+    <LinearLayout
+        android:id="@+id/rlCouch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mImgBtnSaveLeagueInfo"
+        android:layout_marginLeft="@dimen/relativelayout.couch_margin_left_right_top"
+        android:layout_marginStart="@dimen/relativelayout.couch_margin_left_right_top"
+        android:layout_marginRight="@dimen/relativelayout.couch_margin_left_right_top"
+        android:background="@drawable/custom_textview_background"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvCouch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/textview.text_main_coach"
+            android:layout_gravity="center"
+            style="@style/textview_detail"/>
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="@string/button.text_detail"
+            android:textAllCaps="false"
+            android:background="@drawable/custom_button_dialog" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tvTeams"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rlCouch"
+        android:layout_marginTop="@dimen/textview.display_margin_left_top"
+        android:layout_marginLeft="@dimen/textview.display_margin_left_top"
+        android:layout_marginStart="@dimen/textview.display_margin_left_top"
+        style="@style/textview_display"
+        android:text="@string/textview.text.list_teams" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tvTeams"
+        android:layout_margin="10dp"
+        android:background="@drawable/home_rl_background">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mRecyclerViewTeam"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/mFabAddTeam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/imagebutton.bottom_margin"
+        android:layout_marginEnd="@dimen/imagebutton.bottom_margin"
+        android:layout_marginRight="@dimen/imagebutton.bottom_margin"
+        android:src="@drawable/ic_add_white"
+        fab:fab_type="mini"
+        fab:fab_colorNormal="@color/primary_add"
+        fab:fab_colorPressed="@color/primary_add_pressed"/>
+</RelativeLayout>

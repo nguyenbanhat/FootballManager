@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_header"
+    android:layout_alignParentTop="true"
+    android:background="@color/header.background"
+    android:paddingLeft="@dimen/header_padding"
+    android:paddingRight="@dimen/header_padding">
+
+    <TextView
+        android:id="@+id/tvTitleHeader"
+        style="@style/style_text_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

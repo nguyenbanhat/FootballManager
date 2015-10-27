@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/textview_display"
+        android:text="@string/textview.text.title_add_new"
+        android:padding="5dp"/>
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/tvTitle"
+        android:background="@color/item.recycleview.home.line"/>
+
+    <EditText
+        android:id="@+id/edtNameAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_below="@id/viewLine"
+        android:inputType="text"
+        android:hint="@string/edittext.hint_name"/>
+    <requestFocus/>
+
+    <EditText
+        android:id="@+id/edtInforAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_below="@id/edtNameAdd"
+        android:inputType="textMultiLine"
+        android:hint="@string/edittext.hint_information"
+        android:gravity="top"
+        android:padding="5dp"
+        android:background="@drawable/custom_textview_background"
+        android:lines="4"/>
+
+    <ImageButton
+        android:id="@+id/imgBtnUploadPhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtInforAdd"
+        android:contentDescription="@string/app_name"
+        android:background="@null"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/custom_button_upload_photo"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_below="@id/imgBtnUploadPhoto"
+    android:gravity="center">
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:text="@string/button_cancel_text"
+        android:background="@drawable/custom_button_dialog" />
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/custom_button_dialog"
+        android:text="@string/button_ok_text_ok"/>
+</LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/relative.main.background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:background="@drawable/home_rl_background">
+
+        <vn.asiantech.internship.footballmanager.widget.CircleImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="@dimen/circleimageview.width_height"
+            android:layout_height="@dimen/circleimageview.width_height"
+            android:gravity="start"
+            android:contentDescription="@string/app_name" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_gravity="center">
+        <TextView
+            android:id="@+id/tvPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/textview_league" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tvNumber"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="9"
+                android:textColor="@android:color/white"
+                android:padding="5dp"
+                android:background="#3399FF"/>
+            <TextView
+                android:id="@+id/tvPosition"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="CF"
+                android:padding="5dp"
+                android:background="#3399FF"/>
+        </LinearLayout>
+    </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/imgBtnDeletePlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:background="@null"
+            android:gravity="end"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/custom_button_delete_player"/>
+    </LinearLayout>
+</RelativeLayout>

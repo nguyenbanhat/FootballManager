@@ -1,6 +1,26 @@
 <resources>
     <string name="app_name">FootballManager</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="header.bar.title.league">Football League</string>
+    <string name="header.bar.title.team">Football Team</string>
+    <string name="header.bar.title.player">Player</string>
+    <string name="textview.infor">Câu lạc bộ bóng đá Manchester United là một câu lạc bộ bóng đá Anh, Câu lạc bộ bóng đá Manchester United là một câu lạc bộ bóng đá Anh, Câu lạc bộ bóng đá Manchester United là một câu lạc bộ bóng đá Anh, Câu lạc bộ bóng đá Manchester United là một câu lạc bộ bóng đá Anh</string>
+    <string name="textview.text.team_information">Team Information</string>
+    <string name="textview.text.league_information">League Information</string>
+    <string name="textview.text.list_teams">List of football Teams</string>
+    <string name="textview.text.list_players">List Of Football Players</string>
+    <string name="button_cancel_text">Cancel</string>
+    <string name="button_ok_text_ok">OK</string>
+    <string name="edittext.hint_name">Name</string>
+    <string name="edittext.hint_information">Information</string>
+    <string name="textview.text.title_add_new">Add New</string>
+    <string name="button.text_detail">Detail</string>
+    <string name="textview.text_main_coach">Main Coach</string>
+    <string name="text_notice_field_add_new">These fields cannot be empty!</string>
+    <string name="text_notice_change_information">You didnot change this information!</string>
+    <string name="text_notice_exist_name">Name already exist!</string>
+    <string name="text_notice_add_new_success">Successful!</string>
+    <string name="text_priemer">Giải bóng đá ngoại hạng Anh (Premier League) là giải đấu cao nhất của các câu lạc bộ bóng đá Anh gồm 20 đội bóng.</string>
+    <string name="text_back_to_exit">Please click BACK again to exit</string>
 </resources>

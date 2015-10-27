@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/relative.main.background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:background="#FFFF99">
+
+        <vn.asiantech.internship.footballmanager.widget.CircleImageView
+            android:id="@+id/imgLogoLeague"
+            android:layout_width="@dimen/circleimageview.width_height"
+            android:layout_height="@dimen/circleimageview.width_height"
+            android:gravity="start"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/tvLeague"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_weight="2"
+            style="@style/textview_league"
+            android:layout_gravity="center"/>
+        <CheckBox
+            android:id="@+id/chkDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="end"
+            android:visibility="invisible"/>
+    </LinearLayout>
+</RelativeLayout>

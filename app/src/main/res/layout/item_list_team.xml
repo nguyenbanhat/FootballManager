@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <vn.asiantech.internship.footballmanager.widget.CircleImageView
+        android:id="@+id/imgLogoTeam"
+        android:layout_width="@dimen/circleimageview.width_height"
+        android:layout_height="@dimen/circleimageview.width_height"
+        android:layout_margin="5dp"
+        android:src="@drawable/ic_avatar" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_toRightOf="@id/imgLogoTeam"
+            android:layout_toEndOf="@id/imgLogoTeam"
+            android:layout_centerVertical="true" >
+            <TextView
+                android:id="@+id/tvTeam"
+                style="@style/textview_team"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/textview.team_margin_left"
+                android:layout_marginStart="@dimen/textview.team_margin_left" />
+            <ImageButton
+                android:id="@+id/imgBtnDeleteTeam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:background="@null"
+                android:layout_gravity="end"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/custom_button_delete_player"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/imgLogoTeam"
+            android:background="@color/item.recycleview.home.line"/>
+</RelativeLayout>
