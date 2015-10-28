@@ -21,17 +21,10 @@ public class League extends SugarRecord {
     @Column(name = "information")
     String information;
     @Column(name = "logo")
-    int logo;
+    String logo;
     //@Ignore
     private boolean isChecked;
     public League(){}
-
-    public League(String name, String information, int logo, boolean isChecked){
-        this.name = name;
-        this.information = information;
-        this.logo = logo;
-        this.isChecked = isChecked;
-    }
 
     public static void updateLeague(League league){
         if(league != null){

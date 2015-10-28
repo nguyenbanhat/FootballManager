@@ -1,6 +1,7 @@
 package vn.asiantech.internship.footballmanager.ui.team;
 
 import android.app.Dialog;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -64,7 +65,7 @@ public class TeamActivity extends BaseAppCompatActivity implements TeamAdapter.O
         mLeague = League.findById(League.class, mLeagueId);
         if (mLeague != null) {
             mEdtLeagueDetail.setText(mLeague.getInformation());
-            mImgLogoLeagueDetail.setImageResource(mLeague.getLogo());
+            mImgLogoLeagueDetail.setImageBitmap(BitmapFactory.decodeFile(mLeague.getLogo()));
             mTeams = Team.getTeamByLeagueId(mLeagueId);
             mAdapter = new TeamAdapter(mTeams);
             mAdapter.setmOnItemViewListener(this);
@@ -83,10 +84,8 @@ public class TeamActivity extends BaseAppCompatActivity implements TeamAdapter.O
 
     @Override
     public void onItemClick(int position) {
-        Toast.makeText(this,position + "",Toast.LENGTH_SHORT).show();
         long id = mTeams.get(position).getId();
-        mPositionSelelect = position;
-        PlayerActivity_.intent(TeamActivity.this).extra(Common.EXTRA_TEAM_ID, id).start();
+        PlayerActivity_.intent(this).mTeamId(id).start();
     }
 
     @Override
@@ -158,27 +157,27 @@ public class TeamActivity extends BaseAppCompatActivity implements TeamAdapter.O
     void OnImageButtonEditLeague(){
         mEdtLeagueDetail.setEnabled(true);
         mImgBtnEditLeague.setVisibility(View.INVISIBLE);
-        mImgBtnSaveLeagueInfo.setVisibility(View.VISIBLE);
+        mImgBtnSaveLeagueInfo.setVisibility(View.VISIBLE); String name = mEdtLeagueDetail.getText().toString();
+        if(name.equals(mLeague.getInformation())){
+            Toast.makeText(this, R.string.text_notice_change_information, Toast.LENGTH_SHORT).show();
+            mImgBtnSaveLeagueInfo.setVisibility(View.INVISIBLE);
+            mEdtLeagueDetail.setEnabled(false);
+            mImgBtnEditLeague.setVisibility(View.VISIBLE);
+        }
+        else if(name.equals("")){
+            mEdtLeagueDetail.setError(getResources().getString(R.string.text_notice_field_add_new));
+        }else{
+            Toast.makeText(this, R.string.text_notice_add_new_success, Toast.LENGTH_SHORT).show();
+            mLeague.setInformation(name);
+            League.updateLeague(mLeague);
+            mEdtLeagueDetail.setEnabled(false);
+            mImgBtnSaveLeagueInfo.setVisibility(View.INVISIBLE);
+            mImgBtnEditLeague.setVisibility(View.VISIBLE);
+        }
     }
     @Click(R.id.mImgBtnSaveLeagueInfo)
     void OnImageButtonSaveLeagueInfo(){
-        String name = mEdtLeagueDetail.getText().toString();
-       if(name.equals(mLeague.getInformation())){
-           Toast.makeText(this, R.string.text_notice_change_information, Toast.LENGTH_SHORT).show();
-           mImgBtnSaveLeagueInfo.setVisibility(View.INVISIBLE);
-           mEdtLeagueDetail.setEnabled(false);
-           mImgBtnEditLeague.setVisibility(View.VISIBLE);
-       }
-        else if(name.equals("")){
-           mEdtLeagueDetail.setError(getResources().getString(R.string.text_notice_field_add_new));
-       }else{
-           Toast.makeText(this, R.string.text_notice_add_new_success, Toast.LENGTH_SHORT).show();
-           mLeague.setInformation(name);
-           League.updateLeague(mLeague);
-           mEdtLeagueDetail.setEnabled(false);
-           mImgBtnSaveLeagueInfo.setVisibility(View.INVISIBLE);
-           mImgBtnEditLeague.setVisibility(View.VISIBLE);
-       }
+
     }
     private boolean checkTeamName(String name){
         List<Team> teams = Team.getTeamByName(name);

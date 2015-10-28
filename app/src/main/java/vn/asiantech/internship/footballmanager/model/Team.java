@@ -41,7 +41,8 @@ public class Team extends SugarRecord{
     }
 
     public static void deleteTeam(long id){
-        //TODO Player in here
+        //Player in here
+        Player.deletePlayerByTeamId(id);
         Team team  = Team.findById(Team.class, id);
         if(team != null){
             team.delete();

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:background="@color/relative.main.background">
 
     <vn.asiantech.internship.footballmanager.widget.HeaderBar
@@ -84,13 +85,13 @@
         android:src="@drawable/custom_button_save" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/mRecyclerViewTeam"
+        android:id="@+id/mRecyclerViewPlayer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/mImgBtnSaveTeamInfo" />
 
-    <ImageButton
-        android:id="@+id/mImgBtnAddTeam"
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/mFabAddPlayer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -99,7 +100,8 @@
         android:layout_marginBottom="@dimen/imagebutton.bottom_margin"
         android:layout_marginEnd="@dimen/imagebutton.bottom_margin"
         android:layout_marginRight="@dimen/imagebutton.bottom_margin"
-        android:background="@null"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/custom_button_add" />
+        android:src="@drawable/ic_add_white"
+        fab:fab_type="mini"
+        fab:fab_colorNormal="@color/primary_add"
+        fab:fab_colorPressed="@color/primary_add_pressed" />
 </RelativeLayout>

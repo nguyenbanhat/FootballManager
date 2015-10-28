@@ -35,7 +35,7 @@
     <LinearLayout
         android:id="@+id/llView"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="320dp"
         android:layout_below="@+id/mImgBtnEditPlayer"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
@@ -47,7 +47,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="3">
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="5">
 
             <TableRow
                 android:id="@+id/tableRow1"
@@ -55,18 +57,19 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/textview_display"
-                    android:text="Name:" />
+                    android:text="Name" />
 
                 <EditText
                     android:id="@+id/mEdtNamePlayer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="6"
-                    android:inputType="text">
+                    android:ems="8"
+                    android:inputType="text"
+                    android:enabled="false"
+                    style="@style/textview_detail">
                     <requestFocus />
                 </EditText>
             </TableRow>
@@ -75,17 +78,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tvAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/textview_display"
-                    android:text="Age:" />
+                    android:text="Age" />
                 <EditText
                     android:id="@+id/mEdtAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="6"
-                    android:inputType="number"/>
+                    android:ems="8"
+                    android:inputType="number"
+                    android:enabled="false"
+                    style="@style/textview_detail"/>
             </TableRow>
 
             <TableRow
@@ -93,17 +97,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tvBirthday"
+                    android:id="@+id/mTvTeamPlayer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/textview_display"
-                    android:text="Birthday" />
+                    android:text="Team" />
                 <EditText
-                    android:id="@+id/mEdtBirthday"
+                    android:id="@+id/mEdtTeamPlayer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="5"
-                    android:inputType="datetime"/>
+                    android:ems="8"
+                    android:enabled="false"
+                    android:inputType="datetime"
+                    style="@style/textview_detail"/>
             </TableRow>
 
             <TableRow
@@ -111,17 +117,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tvHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/textview_display"
-                    android:text="Height:" />
+                    android:text="Height(cm)" />
                 <EditText
                     android:id="@+id/mEdtHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="6"
-                    android:inputType="number"/>
+                    android:ems="8"
+                    android:enabled="false"
+                    android:inputType="number"
+                    style="@style/textview_detail"/>
             </TableRow>
 
             <TableRow
@@ -129,37 +136,95 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/tvWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/textview_display"
-                    android:text="Weight:" />
+                    android:text="Weight(kg)" />
                 <EditText
                     android:id="@+id/mEdtWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="6"
-                    android:inputType="number"/>
+                    android:ems="8"
+                    android:inputType="number"
+                    android:enabled="false"
+                    style="@style/textview_detail"/>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/textview_display"
+                    android:text="Number" />
+                <EditText
+                    android:id="@+id/mEdtNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="8"
+                    android:inputType="number"
+                    android:enabled="false"
+                    style="@style/textview_detail"/>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/textview_display"
+                    android:text="Position" />
+                <EditText
+                    android:id="@+id/mEdtPosition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="8"
+                    android:inputType="text"
+                    android:enabled="false"
+                    style="@style/textview_detail"/>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/textview_display"
+                    android:text="Country" />
+                <EditText
+                    android:id="@+id/mEdtCountry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="8"
+                    android:inputType="text"
+                    android:enabled="false"
+                    style="@style/textview_detail"/>
             </TableRow>
 
         </TableLayout>
 
         <ImageView
+            android:id="@+id/mImgAvatarPlayer"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_gravity="center"
+            android:layout_height="150dp"
+            android:layout_weight="3"
             android:scaleType="centerCrop"
             android:src="@drawable/a" />
     </LinearLayout>
 
    <Button
+       android:id="@+id/mImgBtnSavePlayer"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:layout_below="@+id/llView"
        android:text="Save"
-       android:layout_marginTop="5dp"
        android:visibility="invisible"
        android:textColor="@android:color/white"
-       android:background="@drawable/custom_button_dialog"/>
+       android:background="@color/header.background"/>
 </RelativeLayout>

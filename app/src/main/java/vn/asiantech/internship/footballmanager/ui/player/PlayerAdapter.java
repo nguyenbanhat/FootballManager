@@ -32,11 +32,15 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
         private TextView mTvPlayer;
         private CircleImageView mImgAvatar;
         private ImageButton mImgBtnDeletePlayer;
+        private TextView mTvNumber;
+        private TextView mTvPosition;
         public PlayerViewHolder(View itemView) {
             super(itemView);
             mTvPlayer = (TextView) itemView.findViewById(R.id.tvPlayer);
             mImgAvatar = (CircleImageView) itemView.findViewById(R.id.imgAvatar);
             mImgBtnDeletePlayer = (ImageButton) itemView.findViewById(R.id.imgBtnDeletePlayer);
+            mTvNumber = (TextView) itemView.findViewById(R.id.tvNumber);
+            mTvPosition = (TextView) itemView.findViewById(R.id.tvPosition);
             itemView.setOnClickListener(this);
             mImgBtnDeletePlayer.setOnClickListener(this);
         }
@@ -47,7 +51,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
                 if(mOnItemViewListener != null){
                     mOnItemViewListener.onItemPlayerClick(getAdapterPosition());
                 }
-            }else if(v.getId() == R.id.imgBtnDeleteTeam && mOnItemViewListener != null){
+            }else if(v.getId() == R.id.imgBtnDeletePlayer && mOnItemViewListener != null){
                 mOnItemViewListener.onDeletePlayerClick(getAdapterPosition());
             }
         }
@@ -65,7 +69,9 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.PlayerView
             return;
         }
         holder.mTvPlayer.setText(mPlayers.get(position).getName());
-        holder.mImgAvatar.setImageResource(mPlayers.get(position).getAvatarId());
+        holder.mImgAvatar.setImageResource(mPlayers.get(position).getAvatar());
+        holder.mTvNumber.setText(mPlayers.get(position).getNumber() + "");
+        holder.mTvPosition.setText(mPlayers.get(position).getPosition());
     }
 
     @Override

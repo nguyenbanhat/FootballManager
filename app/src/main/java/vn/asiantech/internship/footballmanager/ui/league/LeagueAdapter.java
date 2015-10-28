@@ -1,5 +1,6 @@
 package vn.asiantech.internship.footballmanager.ui.league;
 
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +86,7 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
             return;
         }
         holder.mTvLeague.setText(mLeagues.get(position).getName());
-        holder.mImgLogoLeague.setImageResource(mLeagues.get(position).getLogo());
+        holder.mImgLogoLeague.setImageBitmap(BitmapFactory.decodeFile(mLeagues.get(position).getLogo()));
     }
 
     @Override

@@ -1,7 +1,11 @@
 package vn.asiantech.internship.footballmanager.ui.league;
 
 import android.app.Dialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -24,6 +28,7 @@ import vn.asiantech.internship.footballmanager.R;
 import vn.asiantech.internship.footballmanager.model.League;
 import vn.asiantech.internship.footballmanager.ui.core.BaseAppCompatActivity;
 import vn.asiantech.internship.footballmanager.ui.team.TeamActivity_;
+import vn.asiantech.internship.footballmanager.util.Common;
 import vn.asiantech.internship.footballmanager.widget.HeaderBar;
 
 @EActivity(R.layout.activity_main)
@@ -32,6 +37,8 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
     private LeagueAdapter mAdapter;
     private int mPositionSelect = -1;
     private boolean mIsPressDoubleBack;
+    private String mPath;
+    private boolean mIsUpload;
 
     @ViewById
     HeaderBar mHeaderBarLeague;
@@ -140,7 +147,11 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
             @Override
             public void onClick(View v) {
                 //TODO upload Image
-                Toast.makeText(getBaseContext(), "Upload Image", Toast.LENGTH_SHORT).show();
+                if(!mIsUpload){
+                    Toast.makeText(getBaseContext(), "Upload Image", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(i, Common.REQUEST_CODE_LOAD_IMAGE);
+                }
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -161,7 +172,7 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
                 } else if (!checkLeagueName(name)) {
                     League league = new League();
                     league.setName(name);
-                    league.setLogo(R.drawable.logo_premier);
+                    league.setLogo(mPath);
                     league.setInformation(infor);
                     league.save();
                     mLeagues.add(league);
@@ -199,5 +210,23 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
                 mIsPressDoubleBack = false;
             }
         }, 2000);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Common.REQUEST_CODE_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(selectedImage,
+                    filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            //String picturePath = cursor.getString(columnIndex);
+            mPath = cursor.getString(columnIndex);
+            Log.e("Path", mPath + "");
+            cursor.close();
+            //imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+        }
     }
 }
