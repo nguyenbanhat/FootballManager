@@ -23,13 +23,13 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
     private OnItemViewListener mOnItemViewListener;
     private boolean mIsRemoved;
 
-    public LeagueAdapter(List<League> leagues, boolean isChecked) {
+    public LeagueAdapter(List<League> leagues, boolean isRemoved) {
         this.mLeagues = leagues;
-        this.mIsRemoved = isChecked;
+        this.mIsRemoved = isRemoved;
     }
 
-    public void setIsRemoved(boolean isChecked){
-        this.mIsRemoved = isChecked;
+    public void setIsRemoved(boolean isRemoved){
+        this.mIsRemoved = isRemoved;
     }
 
     public boolean getIsRemoved(){

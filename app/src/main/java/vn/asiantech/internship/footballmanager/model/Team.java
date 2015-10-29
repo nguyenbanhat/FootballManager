@@ -30,7 +30,7 @@ public class Team extends SugarRecord{
         if(team != null){
          team.save();
      }
- }
+    }
 
     public static List<Team> getTeamByName(String name){
       return Team.find(Team.class, "name = ?" , name);

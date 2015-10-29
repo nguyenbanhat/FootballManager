@@ -81,6 +81,7 @@ public class PlayerActivity extends BaseAppCompatActivity implements PlayerAdapt
     @Override
     public void onItemPlayerClick(int position) {
         long id = mPlayers.get(position).getId();
+        mPositionSelelect = position;
         DetailPlayerActivity_.intent(this).mPlayerId(id).start();
     }
 

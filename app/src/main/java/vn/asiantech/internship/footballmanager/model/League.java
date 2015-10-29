@@ -2,6 +2,7 @@ package vn.asiantech.internship.footballmanager.model;
 
 import com.orm.SugarRecord;
 import com.orm.dsl.Column;
+import com.orm.dsl.Ignore;
 import com.orm.dsl.Table;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class League extends SugarRecord {
     String information;
     @Column(name = "logo")
     String logo;
-    //@Ignore
+    @Ignore
     private boolean isChecked;
     public League(){}
 

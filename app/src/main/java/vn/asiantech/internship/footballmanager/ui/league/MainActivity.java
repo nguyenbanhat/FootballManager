@@ -38,7 +38,6 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
     private int mPositionSelect = -1;
     private boolean mIsPressDoubleBack;
     private String mPath;
-    private boolean mIsUpload;
 
     @ViewById
     HeaderBar mHeaderBarLeague;
@@ -147,11 +146,9 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
             @Override
             public void onClick(View v) {
                 //TODO upload Image
-                if(!mIsUpload){
                     Toast.makeText(getBaseContext(), "Upload Image", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(i, Common.REQUEST_CODE_LOAD_IMAGE);
-                }
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {

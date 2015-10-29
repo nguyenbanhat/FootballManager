@@ -63,17 +63,15 @@ public class TeamActivity extends BaseAppCompatActivity implements TeamAdapter.O
         mHeaderBarTeam.setTitle(getResources().getString(R.string.header_bar_title_team));
         Log.e("League", mLeagueId + "");
         mLeague = League.findById(League.class, mLeagueId);
-        if (mLeague != null) {
-            mEdtLeagueDetail.setText(mLeague.getInformation());
-            mImgLogoLeagueDetail.setImageBitmap(BitmapFactory.decodeFile(mLeague.getLogo()));
-            mTeams = Team.getTeamByLeagueId(mLeagueId);
-            mAdapter = new TeamAdapter(mTeams);
-            mAdapter.setmOnItemViewListener(this);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-            mRecyclerViewTeam.setLayoutManager(linearLayoutManager);
-            mRecyclerViewTeam.setAdapter(mAdapter);
-            mFabAddTeam.attachToRecyclerView(mRecyclerViewTeam);
-        }
+        mEdtLeagueDetail.setText(mLeague.getInformation());
+        mImgLogoLeagueDetail.setImageBitmap(BitmapFactory.decodeFile(mLeague.getLogo()));
+        mTeams = Team.getTeamByLeagueId(mLeagueId);
+        mAdapter = new TeamAdapter(mTeams);
+        mAdapter.setmOnItemViewListener(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mRecyclerViewTeam.setLayoutManager(linearLayoutManager);
+        mRecyclerViewTeam.setAdapter(mAdapter);
+        mFabAddTeam.attachToRecyclerView(mRecyclerViewTeam);
     }
 
     @Override
@@ -85,6 +83,7 @@ public class TeamActivity extends BaseAppCompatActivity implements TeamAdapter.O
     @Override
     public void onItemClick(int position) {
         long id = mTeams.get(position).getId();
+        mPositionSelelect = position;
         PlayerActivity_.intent(this).mTeamId(id).start();
     }
 
@@ -157,7 +156,11 @@ public class TeamActivity extends BaseAppCompatActivity implements TeamAdapter.O
     void OnImageButtonEditLeague(){
         mEdtLeagueDetail.setEnabled(true);
         mImgBtnEditLeague.setVisibility(View.INVISIBLE);
-        mImgBtnSaveLeagueInfo.setVisibility(View.VISIBLE); String name = mEdtLeagueDetail.getText().toString();
+        mImgBtnSaveLeagueInfo.setVisibility(View.VISIBLE);
+    }
+    @Click(R.id.mImgBtnSaveLeagueInfo)
+    void OnImageButtonSaveLeagueInfo(){
+        String name = mEdtLeagueDetail.getText().toString();
         if(name.equals(mLeague.getInformation())){
             Toast.makeText(this, R.string.text_notice_change_information, Toast.LENGTH_SHORT).show();
             mImgBtnSaveLeagueInfo.setVisibility(View.INVISIBLE);
@@ -174,10 +177,6 @@ public class TeamActivity extends BaseAppCompatActivity implements TeamAdapter.O
             mImgBtnSaveLeagueInfo.setVisibility(View.INVISIBLE);
             mImgBtnEditLeague.setVisibility(View.VISIBLE);
         }
-    }
-    @Click(R.id.mImgBtnSaveLeagueInfo)
-    void OnImageButtonSaveLeagueInfo(){
-
     }
     private boolean checkTeamName(String name){
         List<Team> teams = Team.getTeamByName(name);
