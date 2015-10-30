@@ -99,18 +99,6 @@ public class PlayerActivity extends BaseAppCompatActivity implements PlayerAdapt
         Toast.makeText(getApplication(), R.string.text_notice_add_new_success, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == Common.REQUEST_CODE_ADD) {
-            long teamId = data.getLongExtra(Common.EXTRA_PLAYER_ID, -1);
-            Player player = Player.getPlayerById(teamId);
-            if(player != null){
-                mPlayers.add(player);
-                mAdapter.notifyDataSetChanged();
-            }
-        }
-    }
     @Click(R.id.mImgBtnEditTeam)
     void onButtonEditTeamClick(){
         mEdtTeamDetail.setEnabled(true);
@@ -140,6 +128,19 @@ public class PlayerActivity extends BaseAppCompatActivity implements PlayerAdapt
     @Click(R.id.mFabAddPlayer)
     void onButtonAddPlayerClick(){
         DetailPlayerActivity_.intent(this).mPlayerId(-1).startForResult(Common.REQUEST_CODE_ADD);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == Common.REQUEST_CODE_ADD) {
+            long teamId = data.getLongExtra(Common.EXTRA_PLAYER_ID, -1);
+            Log.e("ADD", teamId + "");
+            Player player = Player.getPlayerById(teamId);
+            if(player != null){
+                mPlayers.add(player);
+                mAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
     private void updateListPlayer(){

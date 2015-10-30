@@ -28,7 +28,7 @@ import vn.asiantech.internship.footballmanager.util.Common;
 @EActivity(R.layout.activity_detail_player)
 public class DetailPlayerActivity extends BaseAppCompatActivity {
     private Player mPlayer;
-    private Team mTeam;
+    private List<Player> mPlayers;
 
     @Extra(Common.EXTRA_PLAYER_ID)
     long mPlayerId;
@@ -61,6 +61,7 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
     public void afterView() {
         Log.e("Player", mPlayerId + "");
         mPlayer = Player.findById(Player.class, mPlayerId);
+        mPlayers = Player.getPlayerByTeamId(mPlayerId);
         if(mPlayer != null){
            setValuePlayer();
         }else{
@@ -77,7 +78,8 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
         mEdtWeight.setEnabled(true);
         mEdtNumber.setEnabled(true);
         mEdtCountry.setEnabled(true);
-        mEdtTeamPlayer.setEnabled(true);
+        mEdtTeamPlayer.setVisibility(View.GONE);
+        mTvTeamPlayer.setVisibility(View.GONE);
         mEdtPosition.setEnabled(true);
     }
     @Click(R.id.mImgBtnSavePlayer)
@@ -91,11 +93,11 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
 
     private void addNewPlayer(){
         String name = mEdtNamePlayer.getText().toString().trim();
-        String country = mEdtCountry.getText().toString().trim();
+        String country = mEdtCountry.getText().toString();
+        String position = mEdtPosition.getText().toString();
         String sttNumber = mEdtNumber.getText() + "";
         String sttHeight = mEdtHeight.getText() + "";
         String sttWeight = mEdtWeight.getText() + "";
-        String position = mEdtPosition.getText().toString();
         int number;
         int height;
         int weight;
@@ -116,15 +118,16 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
             Player player = new Player();
             player.setName(name);
             player.setCountry(country);
-            player.setPosition("CF");
+            player.setPosition(position);
             player.setNumber(number);
             player.setHeight(height);
             player.setWeight(weight);
             player.setBirth("1992/1/1");
             player.setAvatar(R.drawable.a);
-            //player.setTeam_id(mPlayerId);
             player.save();
+            mPlayers.add(player);
             Toast.makeText(getApplication(), R.string.text_notice_add_new_success, Toast.LENGTH_SHORT).show();
+            onBackPressed();
         }else {
             mEdtNamePlayer.setError(getResources().getString(R.string.text_notice_exist_name));
         }
@@ -135,8 +138,9 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
     }
     private void setValuePlayer(){
         int age = Player.getAge(mPlayerId);
-        mTeam = Team.findById(Team.class, mPlayer.getTeam_id());
-        mEdtTeamPlayer.setText(mTeam.getName());
+        Team team;
+        team = Team.findById(Team.class, mPlayer.getTeam_id());
+        mEdtTeamPlayer.setText(team.getName());
         mEdtNamePlayer.setText(mPlayer.getName());
         mEdtCountry.setText(mPlayer.getCountry());
         mEdtNamePlayer.setText(mPlayer.getName());
@@ -165,7 +169,6 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
         String name = mEdtNamePlayer.getText().toString();
         String position = mEdtPosition.getText().toString();
         String country = mEdtCountry.getText().toString();
-        String team =  mEdtTeamPlayer.getText().toString();
         String sttNumber = mEdtNumber.getText() + "";
         String sttHeight = mEdtHeight.getText() + "";
         String sttWeight = mEdtWeight.getText() + "";
@@ -193,8 +196,8 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
             mPlayer.setWeight(weight);
             mPlayer.setBirth("1992/1/1");
             mPlayer.setAvatar(R.drawable.a);
-            mTeam.setName(team);
             Player.updatePlayer(mPlayer);
+            Toast.makeText(getApplication(), R.string.text_notice_add_new_success, Toast.LENGTH_SHORT).show();
             mEdtNamePlayer.setEnabled(false);
             mEdtAge.setEnabled(false);
             mEdtHeight.setEnabled(false);
@@ -203,9 +206,14 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
             mEdtCountry.setEnabled(false);
             mEdtTeamPlayer.setEnabled(false);
             mEdtPosition.setEnabled(false);
-            Toast.makeText(getApplication(), R.string.text_notice_add_new_success, Toast.LENGTH_SHORT).show();
+            onBackPressed();
         }else {
             mEdtNamePlayer.setError(getResources().getString(R.string.text_notice_exist_name));
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
