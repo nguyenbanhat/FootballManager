@@ -103,7 +103,7 @@ public class TeamActivity extends BaseAppCompatActivity implements TeamAdapter.O
     }
 
     @Click(R.id.mFabAddTeam)
-    void OnButtonAddTeamClick() {
+    void onButtonAddTeamClick() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.custom_dialog_add);
@@ -151,13 +151,13 @@ public class TeamActivity extends BaseAppCompatActivity implements TeamAdapter.O
         dialog.show();
     }
     @Click(R.id.mImgBtnEditLeague)
-    void OnImageButtonEditLeague(){
+    void onImageButtonEditLeague(){
         mEdtLeagueDetail.setEnabled(true);
         mImgBtnEditLeague.setVisibility(View.INVISIBLE);
         mImgBtnSaveLeagueInfo.setVisibility(View.VISIBLE);
     }
     @Click(R.id.mImgBtnSaveLeagueInfo)
-    void OnImageButtonSaveLeagueInfo(){
+    void onImageButtonSaveLeagueInfo(){
         String name = mEdtLeagueDetail.getText().toString();
         if(name.equals(mLeague.getInformation())){
             Toast.makeText(this, R.string.text_notice_change_information, Toast.LENGTH_SHORT).show();

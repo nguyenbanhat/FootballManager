@@ -28,10 +28,12 @@ import vn.asiantech.internship.footballmanager.util.Common;
 @EActivity(R.layout.activity_detail_player)
 public class DetailPlayerActivity extends BaseAppCompatActivity {
     private Player mPlayer;
-    private List<Player> mPlayers;
+    private Team team;
 
     @Extra(Common.EXTRA_PLAYER_ID)
     long mPlayerId;
+    @Extra(Common.EXTRA_TEAM_ID)
+    long mTeamId;
     @ViewById
     EditText mEdtNamePlayer;
     @ViewById
@@ -61,7 +63,8 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
     public void afterView() {
         Log.e("Player", mPlayerId + "");
         mPlayer = Player.findById(Player.class, mPlayerId);
-        mPlayers = Player.getPlayerByTeamId(mPlayerId);
+        team = Team.getTeamById(mTeamId);
+        Log.e("TEAM ID", mTeamId+ "");
         if(mPlayer != null){
            setValuePlayer();
         }else{
@@ -125,7 +128,8 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
             player.setBirth("1992/1/1");
             player.setAvatar(R.drawable.a);
             player.save();
-            mPlayers.add(player);
+            player.setTeam_id(mTeamId);
+            //Team.updateTeam(team);
             Toast.makeText(getApplication(), R.string.text_notice_add_new_success, Toast.LENGTH_SHORT).show();
             onBackPressed();
         }else {
