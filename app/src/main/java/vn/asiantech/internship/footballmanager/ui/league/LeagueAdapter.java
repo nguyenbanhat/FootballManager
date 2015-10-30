@@ -45,6 +45,12 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
             mImgLogoLeague = (CircleImageView) itemView.findViewById(R.id.imgLogoLeague);
             mTvLeague = (TextView) itemView.findViewById(R.id.tvLeague);
             mchkDelete = (CheckBox) itemView.findViewById(R.id.chkDelete);
+            if (mIsRemoved) {
+                mchkDelete.setVisibility(View.VISIBLE);
+            } else {
+                itemView.setOnClickListener(this);
+                mchkDelete.setVisibility(View.INVISIBLE);
+            }
             mchkDelete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -55,12 +61,6 @@ public class LeagueAdapter extends RecyclerView.Adapter<LeagueAdapter.LeagueView
                     }
                 }
             });
-            if (!mIsRemoved) {
-                mchkDelete.setVisibility(View.VISIBLE);
-            } else {
-                itemView.setOnClickListener(this);
-                mchkDelete.setVisibility(View.INVISIBLE);
-            }
         }
 
         @Override

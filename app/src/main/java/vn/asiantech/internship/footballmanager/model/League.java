@@ -42,11 +42,10 @@ public class League extends SugarRecord {
     }
 
     public static void deleteLeague(long id){
-        //FootBall Team in here
-        Team.deleteTeamByLeagueId(id);
         League league = League.findById(League.class, id);
         if(league != null){
             league.delete();
         }
+        Team.deleteTeamByLeagueId(id);
     }
 }

@@ -37,7 +37,7 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
     private LeagueAdapter mAdapter;
     private int mPositionSelect = -1;
     private boolean mIsPressDoubleBack;
-    private String mPath;
+    private String mPath = "/storage/emulated/0/Download/ic_avatar_garen.png";
 
     @ViewById
     HeaderBar mHeaderBarLeague;
@@ -54,7 +54,7 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
     public void afterView() {
         mHeaderBarLeague.setTitle(getResources().getString(R.string.header_bar_title_league));
         mLeagues = League.listAll(League.class);
-        mAdapter = new LeagueAdapter(mLeagues, true);
+        mAdapter = new LeagueAdapter(mLeagues, false);
         mAdapter.setmOnItemViewListener(this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplication());
         //mRecyclerViewLeague.setHasFixedSize(true);
@@ -112,7 +112,6 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
             if(mLeagues.get(i).isChecked()){
                 long id = mLeagues.get(i).getId();
                 mLeagues.remove(i);
-                //League.deleteLeague(i);
                 League.deleteLeague(id);
             }
         }
@@ -125,8 +124,8 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
     void onButtonRemoveLeagueClick() {
         mFabRemoveLeague.setVisibility(View.GONE);
         mImgBtnDeleteLeague.setVisibility(View.VISIBLE);
-        if (mAdapter.getIsRemoved()) {
-            mAdapter.setIsRemoved(false);
+        if (!mAdapter.getIsRemoved()) {
+            mAdapter.setIsRemoved(true);
         }
         mRecyclerViewLeague.setAdapter(mAdapter);
         mAdapter.notifyDataSetChanged();
@@ -146,9 +145,9 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
             @Override
             public void onClick(View v) {
                 //TODO upload Image
-                    Toast.makeText(getBaseContext(), "Upload Image", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(i, Common.REQUEST_CODE_LOAD_IMAGE);
+                Toast.makeText(getBaseContext(), "Upload Image", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, Common.REQUEST_CODE_LOAD_IMAGE);
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -162,8 +161,6 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
             public void onClick(View v) {
                 String name = edtName.getText().toString().trim();
                 String infor = edtInfor.getText().toString().trim();
-                Log.e("NAME", name);
-                Log.e("Infor", infor);
                 if (name.equals("") || infor.equals("")) {
                     Toast.makeText(getApplication(), R.string.text_notice_field_add_new, Toast.LENGTH_SHORT).show();
                 } else if (!checkLeagueName(name)) {
@@ -183,30 +180,32 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
         });
         dialog.show();
     }
+
     private boolean checkLeagueName(String name){
         List<League> leagues = League.getLeagueByName(name);
         return (leagues != null && leagues.size() > 0);
     }
-    private void onBackSystemPress(){
-        if(!mAdapter.getIsRemoved()){
-            mAdapter.setIsRemoved(true);
+
+    private void onBackSystemPress() {
+        if (mAdapter.getIsRemoved()) {
+            mAdapter.setIsRemoved(false);
             mImgBtnDeleteLeague.setVisibility(View.INVISIBLE);
             mFabRemoveLeague.setVisibility(View.VISIBLE);
+            mRecyclerViewLeague.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
         }
-        mRecyclerViewLeague.setAdapter(mAdapter);
-        mAdapter.notifyDataSetChanged();
-        if(mIsPressDoubleBack){
+        else if (mIsPressDoubleBack) {
             super.onBackPressed();
-            return;
+        }else {
+            mIsPressDoubleBack = true;
+            Toast.makeText(this, getResources().getString(R.string.text_back_to_exit), Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mIsPressDoubleBack = false;
+                }
+            }, 2000);
         }
-        mIsPressDoubleBack = true;
-        Toast.makeText(this, getResources().getString(R.string.text_back_to_exit), Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mIsPressDoubleBack = false;
-            }
-        }, 2000);
     }
 
     @Override
@@ -219,11 +218,8 @@ public class MainActivity extends BaseAppCompatActivity implements LeagueAdapter
                     filePathColumn, null, null, null);
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            //String picturePath = cursor.getString(columnIndex);
             mPath = cursor.getString(columnIndex);
-            Log.e("Path", mPath + "");
             cursor.close();
-            //imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
         }
     }
 }

@@ -38,7 +38,7 @@ public class Player extends SugarRecord {
     public Player() {
     }
 
-    public void updatePlayer(Player player) {
+    public static void updatePlayer(Player player) {
         if (player != null) {
             player.save();
         }

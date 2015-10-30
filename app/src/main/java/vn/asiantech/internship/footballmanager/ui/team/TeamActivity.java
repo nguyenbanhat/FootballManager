@@ -130,8 +130,6 @@ public class TeamActivity extends BaseAppCompatActivity implements TeamAdapter.O
             public void onClick(View v) {
                 String name = edtName.getText().toString().trim();
                 String infor = edtInfor.getText().toString().trim();
-                Log.e("NAME", name);
-                Log.e("Infor", infor);
                 if (name.equals("") || infor.equals("")) {
                     Toast.makeText(getApplication(), R.string.text_notice_field_add_new, Toast.LENGTH_SHORT).show();
                 } else if (!checkTeamName(name)) {

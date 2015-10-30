@@ -27,7 +27,6 @@ import vn.asiantech.internship.footballmanager.util.Common;
  */
 @EActivity(R.layout.activity_detail_player)
 public class DetailPlayerActivity extends BaseAppCompatActivity {
-    private List<Player> mPlayers;
     private Player mPlayer;
     private Team mTeam;
 
@@ -79,11 +78,12 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
         mEdtNumber.setEnabled(true);
         mEdtCountry.setEnabled(true);
         mEdtTeamPlayer.setEnabled(true);
+        mEdtPosition.setEnabled(true);
     }
     @Click(R.id.mImgBtnSavePlayer)
     void onButtonSavePlayerClick(){
     if(mPlayer != null){
-        Toast.makeText(getApplication(), "OK", Toast.LENGTH_SHORT).show();
+        editPlayer();
         }else {
         addNewPlayer();
     }
@@ -92,12 +92,22 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
     private void addNewPlayer(){
         String name = mEdtNamePlayer.getText().toString().trim();
         String country = mEdtCountry.getText().toString().trim();
-        int number = Integer.parseInt(mEdtNumber.getText().toString());
-        int height = Integer.parseInt(mEdtHeight.getText().toString());
-        int weight = Integer.parseInt(mEdtWeight.getText().toString());
-        if(name.equals("") || country.equals("") ||
-                mEdtNumber.getText().toString().equals("") || mEdtHeight.getText().toString().equals("") ||
-                mEdtWeight.getText().toString().equals("")){
+        String sttNumber = mEdtNumber.getText() + "";
+        String sttHeight = mEdtHeight.getText() + "";
+        String sttWeight = mEdtWeight.getText() + "";
+        String position = mEdtPosition.getText().toString();
+        int number;
+        int height;
+        int weight;
+        try {
+            number = Integer.parseInt(sttNumber);
+            height = Integer.parseInt(sttHeight);
+            weight = Integer.parseInt(sttWeight);
+        }catch (NumberFormatException e) {
+            return;
+        }
+        if(name.equals("") || country.equals("") || sttHeight.equals("") || position.equals("") ||
+                sttNumber.equals("") || sttWeight.equals("")){
             Toast.makeText(this, R.string.text_notice_field_add_new, Toast.LENGTH_SHORT).show();
         }else if(number <= 0 || height < 155 || weight < 50){
             Toast.makeText(this, "Please check your form again! ", Toast.LENGTH_SHORT).show();
@@ -125,7 +135,6 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
     }
     private void setValuePlayer(){
         int age = Player.getAge(mPlayerId);
-        Log.e("Age", age + "");
         mTeam = Team.findById(Team.class, mPlayer.getTeam_id());
         mEdtTeamPlayer.setText(mTeam.getName());
         mEdtNamePlayer.setText(mPlayer.getName());
@@ -151,5 +160,52 @@ public class DetailPlayerActivity extends BaseAppCompatActivity {
         mImgBtnEditPlayer.setImageResource(R.drawable.custom_button_upload_photo);
         mImgBtnSavePlayer.setVisibility(View.VISIBLE);
         mImgAvatarPlayer.setImageResource(R.drawable.ic_no_avatar);
+    }
+    private void editPlayer() {
+        String name = mEdtNamePlayer.getText().toString();
+        String position = mEdtPosition.getText().toString();
+        String country = mEdtCountry.getText().toString();
+        String team =  mEdtTeamPlayer.getText().toString();
+        String sttNumber = mEdtNumber.getText() + "";
+        String sttHeight = mEdtHeight.getText() + "";
+        String sttWeight = mEdtWeight.getText() + "";
+        int number;
+        int height;
+        int weight;
+        try {
+            number = Integer.parseInt(sttNumber);
+            height = Integer.parseInt(sttHeight);
+            weight = Integer.parseInt(sttWeight);
+        }catch (NumberFormatException e) {
+            return;
+            }
+        if (name.equals("") || country.equals("") || sttHeight.equals("") || position.equals("") ||
+                sttNumber.equals("") || sttWeight.equals("")) {
+            Toast.makeText(this, R.string.text_notice_field_add_new, Toast.LENGTH_SHORT).show();
+        }else if(number <= 0 || height < 155 || weight < 50){
+            Toast.makeText(this, "Please check your form again! ", Toast.LENGTH_SHORT).show();
+        }else if(!checkPlayerName(name, number)){
+            mPlayer.setName(name);
+            mPlayer.setCountry(country);
+            mPlayer.setPosition(position);
+            mPlayer.setNumber(number);
+            mPlayer.setHeight(height);
+            mPlayer.setWeight(weight);
+            mPlayer.setBirth("1992/1/1");
+            mPlayer.setAvatar(R.drawable.a);
+            mTeam.setName(team);
+            Player.updatePlayer(mPlayer);
+            mEdtNamePlayer.setEnabled(false);
+            mEdtAge.setEnabled(false);
+            mEdtHeight.setEnabled(false);
+            mEdtWeight.setEnabled(false);
+            mEdtNumber.setEnabled(false);
+            mEdtCountry.setEnabled(false);
+            mEdtTeamPlayer.setEnabled(false);
+            mEdtPosition.setEnabled(false);
+            Toast.makeText(getApplication(), R.string.text_notice_add_new_success, Toast.LENGTH_SHORT).show();
+        }else {
+            mEdtNamePlayer.setError(getResources().getString(R.string.text_notice_exist_name));
+        }
     }
 }
